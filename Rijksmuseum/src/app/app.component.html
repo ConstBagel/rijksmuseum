@@ -1,0 +1,22 @@
+<div class="content">
+  <header>
+    <h1>{{title}}</h1>
+  </header>
+  <div class="search">
+    <app-search
+    (inputChars)="handleSearch($event)"
+    (pickedSort)="handleSort($event)"
+    ></app-search>
+  </div>
+  <div class="list">
+    <app-list [list]="foundItems"></app-list>
+  </div>
+  <div class="navigate">
+    <app-page
+    [currentAmount]="foundAmount"
+    [currentAmoutPerPage]="foundItems.length"
+    (pickedStep)="handleStepPerPage($event)"
+    (pickedPage)="handlePage($event)"
+    ></app-page>
+  </div>
+</div>

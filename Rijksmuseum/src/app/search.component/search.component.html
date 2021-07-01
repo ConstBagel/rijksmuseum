@@ -1,0 +1,11 @@
+<div>
+    <select (change)=" handleChange($event)">
+        <option *ngFor="let opt of listOptions" [value]="opt.val">{{opt.txt}}</option>
+    </select>
+</div>
+<div>
+    <div class="search-block"></div>
+    <div class="search-block"><input [ngModel]="searchWord" (ngModelChange)="handleInput($event)">
+    <button (click)="handleSearch()">Search</button>
+    </div>
+</div>

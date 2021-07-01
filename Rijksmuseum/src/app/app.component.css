@@ -1,0 +1,26 @@
+header {
+    width: 100%;
+    background-color: orange;
+}
+
+h1 {
+    color: black;
+    text-align: center;
+}
+
+.search {
+    margin-top: -20px;
+    background-color: orchid;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    border-right: 1px solid red;
+    border-left: 1px solid red;
+    background-color: yellow;
+}
+
+.navigate {
+    background-color: white;
+}
