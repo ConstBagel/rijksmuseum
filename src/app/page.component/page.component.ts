@@ -7,48 +7,81 @@ import { config } from '../../rijksmuseum-api.service/config';
     styleUrls: ['./page.component.css']
 })
 
-export class AppPage implements OnInit, OnChanges {
+export class AppPage {
     @Input() 
     currentAmount: number;
     @Input()
     currentAmoutPerPage: number;
-    steps: number[];
-    pages: number[];
+    @Input()
+    currentPage: number;
+    minStep: number;
     @Output()
     pickedPage: EventEmitter<number> = new EventEmitter();
     @Output()
     pickedStep: EventEmitter<number> = new EventEmitter();
 
-    constructor() {}
-
-    ngOnInit() {
-        this.setPageView();
+    constructor() {
+        this.minStep = Math.min(...config.STEPS);
     }
 
-    ngOnChanges() {
-        this.setPageView();
-    }
-    
-    getAmountPerPage(event) {
-        this.pickedStep.emit(+event.target.id);
+    getItemsPerPage(event) {
+        // Checking for correct value
+        let inputStep = +event.target.id;
+        inputStep =  config.STEPS.includes(inputStep) ?
+                        inputStep :
+                        Math.min(...config.STEPS);
+        this.pickedStep.emit(inputStep);
     }
 
     getPage(event) {
-        const pickedPage = +event.target.value;
-        this.steps = config.STEPS.filter(step => (config.LIMIT_ITEMS / step) > pickedPage);
-        this.pickedPage.emit(pickedPage);
-    }
-    
-    private setPageView() {
-        this.steps = config.STEPS.filter(step => this.currentAmount > step);
-        this.pages = this.getPages();
+         // Checking for correct value
+        const page = +event.target.innerText;
+        if (page) {
+            this.pickedPage.emit(page);
+        }
     }
 
-    private getPages(): number[] {
-        const len = (this.currentAmount > config.LIMIT_ITEMS) ?
-        config.LIMIT_ITEMS / this.currentAmoutPerPage
-        :
-        this.currentAmount / this.currentAmoutPerPage;
-        return Array(len).fill(1).map((e, i) => e + i);
+    showSteps(): number[] {
+      if (this.currentPage) {
+           const items = (this.currentAmount < config.LIMIT_ITEMS) ?
+                this.currentAmount :
+                config.LIMIT_ITEMS;
+            return config.STEPS
+            .filter(step => 
+                Math.ceil(items / step) >= this.currentPage
+                );
+        }
+        return config.STEPS.filter(step => step <  this.currentAmount);
+    }
+
+    showPages(): number[] {
+        if (this.currentAmount && this.currentAmoutPerPage) {
+            const itemsPerPage = (this.currentAmoutPerPage < this.minStep) ?
+                this.minStep :
+                this.currentAmoutPerPage;
+            const maxItems = (this.currentAmount > config.LIMIT_ITEMS) ?
+                config.LIMIT_ITEMS :
+                this.currentAmount;
+            const newLen = Array(Math.ceil(maxItems / itemsPerPage))
+            .fill(1).map((e, i) => e + i).length;
+            return this.pagination(newLen);
+            /*
+            return Array(Math.ceil(maxItems / itemsPerPage))
+            .fill(1).map((e, i) => e + i); */
+        }      
+    }
+
+    private pagination(overall: number) {
+        const firstItem = 1;
+        const actualPage = this.currentPage || 1;
+        const insertSearch = [actualPage-1 , actualPage, actualPage+1]
+            .filter(e => e > firstItem && e < overall);
+        const tempArr = [ firstItem, ...insertSearch, overall ];
+      return tempArr.reduce((arr, it, i) => {
+          arr.push(it);
+          const nextNumber = ++it;
+          const nextItem = tempArr[++i];
+          if (nextItem && nextNumber !== nextItem) arr.push('...'); 
+          return arr;}, []);
     }
 };

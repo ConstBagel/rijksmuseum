@@ -5,7 +5,9 @@
 </div>
 <div>
     <div class="search-block"></div>
-    <div class="search-block"><input [ngModel]="searchWord" (ngModelChange)="handleInput($event)">
-    <button (click)="handleSearch()">Search</button>
+    <div class="search-block">
+        <input [ngModel]="searchWord" (ngModelChange)="handleInput($event)">
+        <div *ngIf="toggle"><button (click)="handleRemove()">Remove</button></div>
+        <button (click)="handleSearch()">Search</button>
     </div>
 </div>

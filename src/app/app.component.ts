@@ -1,7 +1,8 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { RijksmuseumService } from '../rijksmuseum-api.service/rijksmuseum-api.service';
 
 import { IRespond, IObject }  from '../rijksmuseum-api.service/model';
+import { identifierModuleUrl, ThrowStmt } from '@angular/compiler';
 
 @Component({
     selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
     title: string;
     foundAmount: number;
     currentLen: number;
+    page: number;
     foundItems: IObject[];
     itemsPerPageOptions: number[];
     borderValueOfPages: number;
@@ -23,35 +25,51 @@ export class AppComponent implements OnInit {
 
    ngOnInit() {
         this.title = 'Rijksmuseum';
+        this.makeRequest();
+    }
+
+/*
+    ngOnChanges() {
         this.api.request().subscribe((data: IRespond) => {
-            console.log();
             this.foundItems = data.artObjects;
+            this.currentLen = this.foundItems.length;
             this.foundAmount = data.count;
         });
     }
- 
+*/
     handleSearch(event: string) {
-        console.log(event);
-        this.makeRequest('q', event);
+        !!event.length ?
+            this.api.addQueryParams('q', event) :
+            this.api.removeQueryParams('q');   
+        this.api.removeQueryParams('p');
+        this.api.removeQueryParams('ps');
+        this.page = null;
+        this.makeRequest();
     }
 
     handleSort(event: string) {
-        this.makeRequest('s', event);
+        !!event.length ? 
+            this.api.addQueryParams('s', event) :
+            this.api.removeQueryParams('s');
+        this.makeRequest();
     }
 
     handlePage(event: string) {
-       this.makeRequest('p', event);
+       this.api.addQueryParams('p', event);
+       this.page = +event;
+       this.makeRequest();
     }
 
     handleStepPerPage(event: string) {
-        this.makeRequest('ps', event);
+        this.api.addQueryParams('ps', event);
+        this.makeRequest();
     }
 
-   makeRequest(param: string, val: string): any {
-       this.api.addQueryParams(param, val);
+   makeRequest() {
        this.api.request().subscribe((data: IRespond) => {
-        this.foundItems = data.artObjects;
-        this.foundAmount = data.count;
+            this.foundItems = data.artObjects;
+            this.currentLen = this.foundItems.length;
+            this.foundAmount = data.count;
         });
     }
 }

@@ -14,7 +14,8 @@
   <div class="navigate">
     <app-page
     [currentAmount]="foundAmount"
-    [currentAmoutPerPage]="foundItems.length"
+    [currentAmoutPerPage]="currentLen"
+    [currentPage]="page"
     (pickedStep)="handleStepPerPage($event)"
     (pickedPage)="handlePage($event)"
     ></app-page>

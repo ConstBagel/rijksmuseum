@@ -1,19 +1,16 @@
-<div class="page-nav">
-    <!-- <ul>
-        <li *ngFor="let it of pages; let id = index;">
-            <a [id]="id" href="#" (click)="getPage($event)">{{it}}</a>
-        </li>
-    </ul> -->
+<div class="page-nav" *ngIf="!!showSteps().length">
     <div class="page-block">
-    <select (change)="getPage($event)">
-        <option *ngFor="let it of pages; let id = index;" [value]="id">{{it}}</option>
-    </select>
+        <ul>
+            <li *ngFor="let it of showPages()">
+                <a href="#" (click)="getPage($event)">{{it}}</a>
+            </li>
+        </ul>
     </div>
     <div class="page-block">
-    <ul>
-        <li *ngFor="let it of steps">
-            <a [id]="it" href="#" (click)="getAmountPerPage($event)">{{it}}</a>
-        </li>
-    </ul>
+        <ul>
+            <li *ngFor="let it of showSteps()">
+                <a [id]="it" href="#" (click)="getItemsPerPage($event)">{{it}}</a>
+            </li>
+        </ul>
     </div>
 </div>

@@ -15,8 +15,11 @@ export class AppSearch implements OnInit {
     @Output()
     inputChars: EventEmitter<string> = new EventEmitter();
     searchWord: string;
+    toggle: boolean
 
-    constructor() {}
+    constructor() {
+        this.toggle = false;
+    }
 
    ngOnInit() {
        this.listOptions = config.SORT_OPTIONS; 
@@ -30,8 +33,14 @@ export class AppSearch implements OnInit {
         this.searchWord = event;
     }
 
+    handleRemove() {
+        this.searchWord = '';
+        this.inputChars.emit(this.searchWord);
+        this.toggle = false;
+    }
+
     handleSearch() {
-        console.log('F', this.searchWord);
+        this.toggle = true;
         this.inputChars.emit(encodeURIComponent(this.searchWord));
     }
 }
