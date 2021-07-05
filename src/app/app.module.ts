@@ -6,11 +6,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppSearch } from './search.component/search.component';
-import { AppList } from './list.component/list.component';
+import { AppListItem } from './list-item.component/list-item.component';
 import { AppPage } from './page.component/page.component';
 
 @NgModule({
-  declarations: [AppComponent, AppSearch, AppList, AppPage],
+  declarations: [AppComponent, AppSearch, AppListItem, AppPage],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,

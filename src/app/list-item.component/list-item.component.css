@@ -1,0 +1,88 @@
+.item {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    border: 1px solid red;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+    z-index: 0;
+}
+.item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+}
+
+.item figcaption {
+    width: 100%;
+    height: 100%;
+    bottom: 0px;
+    opacity: 0;
+    color: white;
+    text-align: center;
+    position: absolute;
+    z-index: 0;
+}
+
+.item figcaption:hover {
+    height: 70%;
+    overflow: hidden;
+    opacity: 1;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.no-picture {
+    color: red;
+}
+
+.popup-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    height: 100%;
+    background-color:  rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.popup {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 25%;
+    left: 25%;
+    z-index: 2;
+    background-color: white;
+}
+
+.popup-grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.popup-grid-item {
+    font-size: 16px;
+    text-align: center;
+}
+
+.popup-content-section {
+    height: 80%;
+}
+
+.popup-btn-section {
+    height: 20%;
+}
+
+.popup p {
+    color: black;
+    font-size: 14px;
+}
+
+.popup-content-section img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}

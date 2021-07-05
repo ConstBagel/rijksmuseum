@@ -3,7 +3,8 @@ export interface IObject {
     "objectNumber": string,
     "principalOrFirstMaker": string,
     "longTitle": string,
-    "webImage": { "url": string }
+    "webImage"?: { "url": string },
+    "headerImage"?: { "url": string },
 }
 
 export interface IRespond {

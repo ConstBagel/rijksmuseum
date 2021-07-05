@@ -73,7 +73,7 @@ export class AppPage {
 
     private pagination(overall: number) {
         const firstItem = 1;
-        const actualPage = this.currentPage || 1;
+        const actualPage = this.currentPage || config.DEFAULT_PAGE;
         const insertSearch = [actualPage-1 , actualPage, actualPage+1]
             .filter(e => e > firstItem && e < overall);
         const tempArr = [ firstItem, ...insertSearch, overall ];

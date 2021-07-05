@@ -24,3 +24,10 @@ h1 {
 .navigate {
     background-color: white;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: center;
+    align-content: center;
+}

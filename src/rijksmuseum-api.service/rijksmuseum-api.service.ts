@@ -21,7 +21,6 @@ export class RijksmuseumService {
         return;
       }
       this.addedQueryParams.push({ [key] : val });
-      console.log(this.addedQueryParams);
     }
 
     public removeQueryParams(key: string) {
