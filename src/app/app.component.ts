@@ -1,75 +1,71 @@
 import { Component, Injectable, OnInit } from '@angular/core';
-import { RijksmuseumService } from '../rijksmuseum-api.service/rijksmuseum-api.service';
+import { RijksmuseumService } from 'src/services/rijksmuseum-api.service';
 
-import { IRespond, IObject }  from '../rijksmuseum-api.service/model';
+import { IRespond, IObject } from 'src/services/model';
 import { identifierModuleUrl, ThrowStmt } from '@angular/compiler';
 
 @Component({
-    selector: 'app-root',
-    styleUrls: ['app.component.css'],
-    templateUrl: './app.component.html',
-    providers: [RijksmuseumService]
+  selector: 'app-root',
+  styleUrls: ['app.component.css'],
+  templateUrl: './app.component.html',
+  providers: [RijksmuseumService],
 })
-
 @Injectable()
 export class AppComponent implements OnInit {
-    title: string;
-    foundAmount: number;
-    currentLen: number;
-    page: number;
-    foundItems: IObject[];
-    itemsPerPageOptions: number[];
-    borderValueOfPages: number;
+  totalItemsCount: number | null = null;
+  itemsPerPage: number | null = null;
+  currentPage: number | null = null;
+  items: IObject[] | null = null;
+  itemsPerPageOptions: number[]; // not used
+  borderValueOfPages: number; // not used
 
-    constructor(private api: RijksmuseumService) {}
+  constructor(private rijksmuseumService: RijksmuseumService) {}
 
-   ngOnInit() {
-        this.title = 'Rijksmuseum';
-        this.makeRequest();
-    }
+  ngOnInit() {
+    this.fetchPictures();
+  }
 
-/*
+  /*
     ngOnChanges() {
         this.api.request().subscribe((data: IRespond) => {
-            this.foundItems = data.artObjects;
-            this.currentLen = this.foundItems.length;
-            this.foundAmount = data.count;
+            this.items = data.artObjects;
+            this.itemsPerPage = this.items.length;
+            this.totalItemsCount = data.count;
         });
     }
 */
-    handleSearch(event: string) {
-        !!event.length ?
-            this.api.addQueryParams('q', event) :
-            this.api.removeQueryParams('q');   
-        this.api.removeQueryParams('p');
-        this.api.removeQueryParams('ps');
-        this.page = null;
-        this.makeRequest();
-    }
 
-    handleSort(event: string) {
-        !!event.length ? 
-            this.api.addQueryParams('s', event) :
-            this.api.removeQueryParams('s');
-        this.makeRequest();
-    }
+  handleSearch(searchFiler: string) {
+    this.currentPage = null;
+    this.fetchPictures({
+      p: '',
+      ps: '',
+      q: searchFiler,
+    });
+  }
 
-    handlePage(event: string) {
-       this.api.addQueryParams('p', event);
-       this.page = +event;
-       this.makeRequest();
-    }
+  handleSort(sortFilter: string) {
+    this.fetchPictures({ s: sortFilter });
+  }
 
-    handleStepPerPage(event: string) {
-        this.api.addQueryParams('ps', event);
-        this.makeRequest();
-    }
+  handlePageNumberChange(pageNumber: number) {
+    this.fetchPictures({ p: pageNumber });
+    this.currentPage = pageNumber;
+  }
 
-   makeRequest() {
-       this.api.request().subscribe((data: IRespond) => {
-            this.foundItems = data.artObjects;
-            this.currentLen = this.foundItems.length;
-            this.foundAmount = data.count;
-        });
-    }
+  handleItemsPerPageChange(itemsPerPage: string) {
+    this.fetchPictures({ ps: itemsPerPage });
+  }
+
+  identify(index, item) {
+    return item.id;
+  }
+
+  fetchPictures(queryParam = {}) {
+    this.rijksmuseumService.fetchPictures(queryParam).subscribe(({ artObjects, count }: IRespond) => {
+      this.items = artObjects;
+      this.itemsPerPage = this.items.length;
+      this.totalItemsCount = count;
+    });
+  }
 }

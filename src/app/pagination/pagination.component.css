@@ -1,0 +1,16 @@
+.pagination-block {
+  width: 50%;
+  display: inline-block;
+}
+
+.pagination-nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 30px;
+}
+
+.pagination-block ul li {
+  display: inline-block;
+  list-style: none;
+  margin-left: 30px;
+}
