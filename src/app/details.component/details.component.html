@@ -1,0 +1,17 @@
+<section>
+    <header>
+        <h1>{{ details?.title }}</h1>
+    </header>
+    <main>
+    <div>
+       <img [src]="details?.webImage.url" [alt]="details?.title"/> 
+    </div>
+    <p>
+        {{ details?.description }}
+    </p>
+    <p>
+       <span *ngFor="let type of objectTypes"><a href="#" (click)="setType(type)">{{type}}</a></span>
+    </p>
+    </main>
+</section>
+<p><button (click)="goToMainPage()">To Main Page</button></p>

@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output, OnInit, OnChanges } from '@angular/core';
-import { config } from '../../rijksmuseum-api.service/config';
+import { config } from '../../../rijksmuseum-api.service/config';
 
 @Component({
     selector: 'app-page',
@@ -7,7 +7,7 @@ import { config } from '../../rijksmuseum-api.service/config';
     styleUrls: ['./page.component.css']
 })
 
-export class AppPage {
+export class PageComponent {
     @Input() 
     currentAmount: number;
     @Input()

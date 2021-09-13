@@ -1,6 +1,6 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { config } from '../../rijksmuseum-api.service/config';
+import { config } from '../../../rijksmuseum-api.service/config';
 
 @Component({
     selector: 'app-search',
@@ -8,7 +8,7 @@ import { config } from '../../rijksmuseum-api.service/config';
     styleUrls: ['./search.component.css']
 })
 
-export class AppSearch implements OnInit {
+export class SearchComponent implements OnInit {
     listOptions: { val: string, txt: string}[];
     @Output()
     pickedSort: EventEmitter<string> = new EventEmitter();
