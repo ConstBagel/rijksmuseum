@@ -1,16 +1,16 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { MainComponent } from "./main.component/main.component";
-import { DetailsComponent } from "./details.component/details.component";
-import { PageNotFoundComponent } from "./page-not-found.component/page-not-found.component";
+import { AppMain } from "./main/main.component";
+import { AppDetails } from "./details/details.component";
+import { AppPageNotFound } from "./page-not-found/page-not-found.component";
 
 
 const appRoutes: Routes = [
-    { path: '', component: MainComponent },
-    { path: 'details/:id', component: DetailsComponent },
-    { path: 'not-found', component: PageNotFoundComponent },
-    { path: '**', redirectTo: '/not-found' } 
+    { path: '', component: AppMain },
+    { path: 'details/:id', component: AppDetails },
+    { path: 'not-found', component: AppPageNotFound },
+    { path: '**', redirectTo: '/not-found' }
   ];
 
 @NgModule({
@@ -19,5 +19,4 @@ const appRoutes: Routes = [
 })
 
 export class AppRoutingModule {
-
 }

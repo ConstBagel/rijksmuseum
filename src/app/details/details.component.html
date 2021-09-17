@@ -1,0 +1,26 @@
+<div class="main_container" loading="{{details}}">
+    <header>
+        <h1>{{ details?.title }}</h1>
+    </header>
+    <main>
+        <aside *ngIf="details?.hasImage">
+            <img [src]="details?.webImage.url" [alt]="details?.title"/> 
+        </aside>
+        <section>
+            <p>
+            <span class="title">Description:</span> {{ details?.description }}
+            </p>
+            <p><span class="title">Principal of first maker</span> {{ details?.principalOrFirstMaker }}</p>
+            <p><span class="title">Materials: </span>
+                <span *ngFor="let material of details?.materials">
+                    <a href="#" (click)="goToMainPage(material)">{{ material }}</a>
+                </span>
+            </p>
+            <p><span class="title">Dating:</span> {{details?.dating.yearEarly}} - {{ details?.dating.yearLate}}</p>
+        </section>
+    </main>
+    <br class="fix">
+    <footer>
+        <p><button (click)="goToMainPage()">To Main Page</button></p>
+    </footer>
+</div>

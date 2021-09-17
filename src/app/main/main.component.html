@@ -1,0 +1,27 @@
+<div class="content">
+    <header>
+      <h1>Rijksmuseum</h1>
+    </header>
+    <div class="search">
+      <app-search [searchWord]="inputSearch" (onSearch)="handleSearch($event)" (onSort)="handleSort($event)"></app-search>
+    </div>
+    <div loading="{{items && !items}}">
+      <div class="grid-container" *ngIf="items && !items.length; else noFoundBlock">
+          <h4>No item found</h4>
+      </div>
+      <ng-template #noFoundBlock>
+          <div class="grid-container">
+              <app-list-item [item]="item" *ngFor="let item of items; trackBy: identify"></app-list-item>
+          </div>
+      </ng-template>
+    </div>
+    <div class="navigate">
+      <app-pagination
+        [totalItemsCount]="totalItemsCount"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (onItemsPerPageChange)="handleItemsPerPageChange($event)"
+        (onPageNumberChange)="handlePageNumberChange($event)"
+      ></app-pagination>
+    </div>
+</div>

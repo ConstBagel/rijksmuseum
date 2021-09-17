@@ -5,24 +5,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
+import { RijksmuseumService } from '../services/rijksmuseum-api.service';
+
 import { AppComponent } from './app.component';
-import { MainComponent } from './main.component/main.component';
-import { SearchComponent } from './main.component/search.component/search.component';
-import { ListItemComponent } from './main.component/list-item.component/list-item.component';
-import { PageComponent } from './main.component/page.component/page.component';
-import { DetailsComponent } from './details.component/details.component';
-import { PageNotFoundComponent } from './page-not-found.component/page-not-found.component';
+import {  AppMain } from './main/main.component';
+import { AppSearch } from './main/search/search.component';
+import { AppListItem } from './main/list-item/list-item.component';
+import { AppPagination } from './main/pagination/pagination.component';
+import { AppDetails } from './details/details.component';
+import { AppPageNotFound } from './page-not-found/page-not-found.component';
+import { LoadingDirective } from './loading/loading.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    SearchComponent,
-    ListItemComponent,
-    PageComponent,
-    DetailsComponent,
-    PageNotFoundComponent
+    AppMain,
+    AppSearch,
+    AppListItem,
+    AppPagination,
+    AppDetails,
+    AppPageNotFound,
+    LoadingDirective
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -31,7 +35,7 @@ import { PageNotFoundComponent } from './page-not-found.component/page-not-found
     FormsModule,
     HttpClientModule,
     AppRoutingModule
-  ]
+  ],
+  providers: [RijksmuseumService]
 })
-
 export class AppModule {}
