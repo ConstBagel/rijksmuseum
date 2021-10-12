@@ -1,6 +1,6 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { RijksmuseumService } from 'src/services/rijksmuseum-api.service';
-
+import { ActivatedRoute } from '@angular/router';
 import { IRespond, IObject } from 'src/services/model';
 
 @Component({
@@ -19,19 +19,22 @@ export class AppMain implements OnInit {
   inputSearch: string | null = null;
   itemsPerPageOptions: number[]; // not used
   borderValueOfPages: number; // not used
+  isLoading: boolean = false;
 
-  constructor(private rijksmuseumService: RijksmuseumService) {}
+  constructor(
+    private rijksmuseumService: RijksmuseumService,
+    private route: ActivatedRoute) {}
 
   ngOnInit() {
-    const searchWord = localStorage.getItem('searchWord');
-    if (searchWord) {
-      this.handleSearch(searchWord);
-      this.inputSearch = searchWord;
-      localStorage.setItem('searchWord', '');
-    }
-    else {
+    this.route.queryParams.subscribe(param => {
+      const searchWord = param['q'];
+      if (typeof searchWord !== 'undefined') {
+        this.inputSearch = decodeURIComponent(searchWord)
+        this.handleSearch(this.inputSearch);
+        return;
+      }
       this.fetchPictures();
-    }
+    });
   }
 
   handleSearch(searchFiler: string) {
@@ -60,11 +63,13 @@ export class AppMain implements OnInit {
   }
 
   fetchPictures(queryParam = {}) {
+    this.isLoading = true;
     this.items = this.items && null;
     this.rijksmuseumService.fetchPictures(queryParam).subscribe(({ artObjects, count }: IRespond) => {
       this.items = artObjects;
       this.itemsPerPage = this.items.length;
       this.totalItemsCount = count;
+      this.isLoading = false;
     });
   }
 }

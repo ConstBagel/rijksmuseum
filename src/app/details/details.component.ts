@@ -31,8 +31,11 @@ export class AppDetails implements OnInit {
                });
     }
 
+    getEncodedQuery(searchParam: string): string {
+        return encodeURIComponent(searchParam);
+    }
+
     goToMainPage(searchWord:string = '') {
         this.router.navigate([''], { relativeTo: this.route});
-        localStorage.setItem('searchWord', searchWord);
     }
 }

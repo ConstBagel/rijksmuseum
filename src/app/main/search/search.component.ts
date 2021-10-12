@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { SORT_OPTIONS } from 'src/services/config';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppSearch implements OnInit {
   onSearch: EventEmitter<string> = new EventEmitter();
  
 
-  constructor() {
+  constructor(private router: Router) {
     this.sortOptions = SORT_OPTIONS;
   }
 
@@ -31,9 +31,11 @@ export class AppSearch implements OnInit {
   onRemoveButtonClick() {
     this.searchWord = '';
     this.onSearch.emit(this.searchWord);
+    this.router.navigate(['']);
   }
 
   handleSearch() {
     this.onSearch.emit(this.searchWord);
+    this.router.navigate([''], {queryParams: {'q': encodeURIComponent(this.searchWord)}});
   }
 }

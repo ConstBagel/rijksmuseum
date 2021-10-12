@@ -1,4 +1,4 @@
-<div class="main_container" loading="{{details}}">
+<div class="main_container">
     <header>
         <h1>{{ details?.title }}</h1>
     </header>
@@ -13,7 +13,10 @@
             <p><span class="title">Principal of first maker</span> {{ details?.principalOrFirstMaker }}</p>
             <p><span class="title">Materials: </span>
                 <span *ngFor="let material of details?.materials">
-                    <a href="#" (click)="goToMainPage(material)">{{ material }}</a>
+                    <a
+                        [routerLink]="['']"
+                        [queryParams]="{q: getEncodedQuery(material)}"
+                    >{{ material }}</a>
                 </span>
             </p>
             <p><span class="title">Dating:</span> {{details?.dating.yearEarly}} - {{ details?.dating.yearLate}}</p>

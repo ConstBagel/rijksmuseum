@@ -14,8 +14,6 @@ import { AppListItem } from './main/list-item/list-item.component';
 import { AppPagination } from './main/pagination/pagination.component';
 import { AppDetails } from './details/details.component';
 import { AppPageNotFound } from './page-not-found/page-not-found.component';
-import { LoadingDirective } from './loading/loading.directive';
-
 
 @NgModule({
   declarations: [
@@ -25,8 +23,7 @@ import { LoadingDirective } from './loading/loading.directive';
     AppListItem,
     AppPagination,
     AppDetails,
-    AppPageNotFound,
-    LoadingDirective
+    AppPageNotFound
   ],
   bootstrap: [AppComponent],
   imports: [
