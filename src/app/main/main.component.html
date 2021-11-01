@@ -1,28 +1,30 @@
-<div class="content">
-    <header>
-      <h1>Rijksmuseum</h1>
+<div class="main-content-wrapper">
+    <header class="main-header">
+      <h1 class="main-header-title">Rijksmuseum</h1>
     </header>
-    <div class="search">
-      <app-search [searchWord]="inputSearch" (onSearch)="handleSearch($event)" (onSort)="handleSort($event)"></app-search>
-    </div>
-    <div class="container">
-        <div *ngIf="isLoading" class="loading"></div>
-        <div *ngIf="!isLoading && !items.length; else showItems">
-          <h4>No item found</h4>
-        </div>
-        <ng-template #showItems>
-          <div class="grid-container">
-              <app-list-item [item]="item" *ngFor="let item of items; trackBy: identify"></app-list-item>
+    <main>
+      <header class="main-search">
+        <app-search [searchWord]="inputSearch" (onSearch)="handleSearch($event)" (onSort)="handleSort($event)"></app-search>
+      </header>
+      <section class="main-container">
+          <div *ngIf="isLoading" class="loading"></div>
+          <div class="not-found" *ngIf="!isLoading && !items.length; else showItems">
+            <h4>No item found</h4>
           </div>
-        </ng-template>
-    </div>
-    <div class="navigate">
-      <app-pagination
-        [totalItemsCount]="totalItemsCount"
-        [itemsPerPage]="itemsPerPage"
-        [currentPage]="currentPage"
-        (onItemsPerPageChange)="handleItemsPerPageChange($event)"
-        (onPageNumberChange)="handlePageNumberChange($event)"
-      ></app-pagination>
-    </div>
+          <ng-template #showItems>
+            <div class="grid-container">
+                <app-list-item class="grid-item" [item]="item" *ngFor="let item of items; trackBy: identify"></app-list-item>
+            </div>
+          </ng-template>
+      </section>
+      <footer class="main-navigate">
+        <app-pagination
+          [totalItemsCount]="totalItemsCount"
+          [itemsPerPage]="itemsPerPage"
+          [currentPage]="currentPage"
+          (onItemsPerPageChange)="handleItemsPerPageChange($event)"
+          (onPageNumberChange)="handlePageNumberChange($event)"
+        ></app-pagination>
+      </footer>
+    </main>
 </div>

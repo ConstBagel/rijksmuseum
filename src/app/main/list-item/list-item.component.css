@@ -1,4 +1,4 @@
-.item {
+ .item {
     width: 150px;
     height: 150px;
     text-align: center;
@@ -8,11 +8,12 @@
     padding: 0;
     z-index: 0;
 }
+
 .item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 
 .item figcaption {
@@ -48,41 +49,67 @@
     z-index: 1;
 }
 
-.popup {
-    position: fixed;
-    width: 50%;
+.popup-wrapper {
+    margin: 10% auto;
+    width: 80%;
     height: 50%;
-    top: 25%;
-    left: 25%;
-    z-index: 2;
     background-color: white;
+    border-radius: 10px;
 }
 
-.popup-grid-container {
-    display: grid;
-    grid-template-columns: auto auto;
-}
-
-.popup-grid-item {
-    font-size: 16px;
+.popup-title {
+    width: 100%;
+    height: 10%;
     text-align: center;
+    block-size: fit-content;
 }
 
-.popup-content-section {
-    height: 80%;
-}
-
-.popup-btn-section {
-    height: 20%;
-}
-
-.popup p {
-    color: black;
-    font-size: 14px;
-}
-
-.popup-content-section img {
-    width: 70%;
+.popup-item-info-section {
+    width: 100%;
     height: 70%;
-    object-fit: cover;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.popup-item-picture {
+    width: 50%;
+}
+
+.popup-item-picture img {
+    width: 100%;
+    height: auto;
+}
+
+.popup-item-description {
+    width: 40%;
+    white-space: normal;
+    block-size: fit-content;
+}
+
+.popup-button-group {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+}
+
+.popup-button {
+    width: 50%;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    border-radius: 10px;
+}
+
+.popup-button:hover {
+    background-color:black;
+    color: white;
+}
+
+.items-not-found {
+    text-align: center;
+    font-weight: bold;
 }

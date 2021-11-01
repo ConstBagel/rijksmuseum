@@ -1,16 +1,22 @@
-.pagination-block {
-  width: 50%;
-  display: inline-block;
+.pagination-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
-.pagination-nav ul li {
-  display: inline-block;
-  list-style: none;
-  margin-left: 30px;
+.pagination-nav {
+  margin: auto;
 }
 
-.pagination-block ul li {
+.pagination-nav-link {
   display: inline-block;
   list-style: none;
-  margin-left: 30px;
+  margin-right: 20px;
 }
+
+.pagination-nav-link:hover {
+  background-color: black;
+  color: white;
+}
+
+

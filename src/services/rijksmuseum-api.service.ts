@@ -17,7 +17,7 @@ export class RijksmuseumService {
     return this.http.get<IRespond>(`${BASE_URL}?key=${KEY}&${searchQuery}`);
   }
 
-  fetchCollectionDetails(objectNumber: string): Observable<IDetails> {
+  public fetchCollectionDetails(objectNumber: string): Observable<IDetails> {
     return this.http.get<IDetails>(`${BASE_URL}/${objectNumber}?key=${KEY}`);
   }
 }

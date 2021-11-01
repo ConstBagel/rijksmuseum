@@ -12,5 +12,3 @@ export const SORT_OPTIONS = [
     { value: 'artist', label: 'Artist name [A-Z]' },
     { value: 'artistdesc', label: 'Artist name [Z-A]' },
 ];
-
-

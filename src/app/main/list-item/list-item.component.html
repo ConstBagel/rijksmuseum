@@ -6,22 +6,22 @@
   </ng-template>
 </figure>
 <div class="popup-background" *ngIf="isShown">
-  <div class="popup">
-    <div class="popup-grid-container">
-      <div class="popup-grid-item popup-content-section">
-        <img [src]="item.headerImage.url" [alt]="item.title" *ngIf="item.headerImage; else withoutImg" />
-      </div>
-      <div class="popup-grid-item popup-content-section">
-        <h2>{{ item.title }}</h2>
-        <p>{{ item.longTitle }}</p>
-        <p>{{ item.principalOrFirstMaker }}</p>
-      </div>
-      <div class="popup-grid-item popup-btn-section">
-        <button (click)="goToDetailsPage()">View more details</button>
-      </div>
-      <div class="popup-grid-item popup-btn-section">
-        <button (click)="togglePopup()">Close</button>
-      </div>
-    </div>
+  <div class="popup-wrapper">
+    <header class="popup-title">
+      <h2>{{ item.title }}</h2>
+    </header>
+    <section class="popup-item-info-section">
+        <figure class="popup-item-picture">
+          <img [src]="item.headerImage.url" [alt]="item.title" />
+        </figure>
+        <article class="popup-item-description">
+          <h3>{{ item.longTitle }}</h3>
+          <p>{{ item.principalOrFirstMaker }}</p>
+        </article>
+    </section>
+    <footer class="popup-button-group">
+      <button class="popup-button" (click)="goToDetailsPage()">View more details</button>
+      <button class="popup-button" (click)="togglePopup()">Close</button>
+    </footer>
   </div>
 </div>

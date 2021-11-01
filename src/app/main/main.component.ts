@@ -17,8 +17,6 @@ export class AppMain implements OnInit {
   currentPage: number | null = null;
   items: IObject[] | null = null;
   inputSearch: string | null = null;
-  itemsPerPageOptions: number[]; // not used
-  borderValueOfPages: number; // not used
   isLoading: boolean = false;
 
   constructor(
@@ -26,10 +24,10 @@ export class AppMain implements OnInit {
     private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(param => {
-      const searchWord = param['q'];
+    this.route.queryParams.subscribe(({q}) => {
+      const searchWord = q;
       if (typeof searchWord !== 'undefined') {
-        this.inputSearch = decodeURIComponent(searchWord)
+        this.inputSearch = decodeURIComponent(searchWord);
         this.handleSearch(this.inputSearch);
         return;
       }
@@ -64,7 +62,6 @@ export class AppMain implements OnInit {
 
   fetchPictures(queryParam = {}) {
     this.isLoading = true;
-    this.items = this.items && null;
     this.rijksmuseumService.fetchPictures(queryParam).subscribe(({ artObjects, count }: IRespond) => {
       this.items = artObjects;
       this.itemsPerPage = this.items.length;

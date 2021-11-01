@@ -13,7 +13,9 @@ import { IDetails, IObjectDetails } from '../../services/model';
 export class AppDetails implements OnInit {
     @Output()
     type: EventEmitter<string>;
-    private details: IObjectDetails | null = null; 
+    private details: IObjectDetails | null = null;
+    isLoading: boolean = false;
+    isDetailsPresent: boolean = true;
 
     constructor(
         private rijksmuseumService: RijksmuseumService,
@@ -22,13 +24,19 @@ export class AppDetails implements OnInit {
 
     ngOnInit() {
         this.route.params
-            .subscribe((params: Params) => {
-               this.rijksmuseumService
-                    .fetchCollectionDetails(params['id'])
+            .subscribe(({id}) => {
+                this.isLoading = true;
+                this.rijksmuseumService
+                    .fetchCollectionDetails(id)
                         .subscribe((data: IDetails) => {
                             this.details = data.artObject;
+                            this.isLoading = false;
+                    },
+                        (_) => {
+                            this.isDetailsPresent = false;
+                            this.isLoading = false;
                     });
-               });
+                });
     }
 
     getEncodedQuery(searchParam: string): string {

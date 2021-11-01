@@ -47,8 +47,6 @@ export class AppPagination {
     if (!this.totalItemsCount && !this.itemsPerPage) return;
 
     const itemsPerPage = Math.max(this.itemsPerPage, this.minStep);
-    // const itemsPerPage = this.itemsPerPage < this.minStep ? this.minStep : this.itemsPerPage;
-    // const maxItems = this.totalItemsCount > config.LIMIT_ITEMS ? config.LIMIT_ITEMS : this.totalItemsCount;
     const maxItems = Math.min(this.totalItemsCount, LIMIT_ITEMS);
     return Math.ceil(maxItems / itemsPerPage);
   }

@@ -1,16 +1,16 @@
 <div class="pagination-nav" *ngIf="!!getItemsPerPageOptions().length">
-  <div class="pagination-block">
+  <section class="pagination-block">
     <ul>
-      <li *ngFor="let page of getPaginationView()">
-        <a href="#" (click)="handlePageNumberChange($event)">{{ page }}</a>
+      <li class="pagination-nav-link" *ngFor="let page of getPaginationView()">
+        <a (click)="handlePageNumberChange($event)">{{ page }}</a>
       </li>
     </ul>
-  </div>
-  <div class="pagination-block">
+  </section>
+  <section class="pagination-block">
     <ul>
-      <li *ngFor="let option of getItemsPerPageOptions()">
-        <a [id]="option" href="#" (click)="handleItemsPerPageChange(option)">{{ option }}</a>
+      <li class="pagination-nav-link" *ngFor="let option of getItemsPerPageOptions()">
+        <a [id]="option" (click)="handleItemsPerPageChange(option)">{{ option }}</a>
       </li>
     </ul>
-  </div>
+  </section>
 </div>
